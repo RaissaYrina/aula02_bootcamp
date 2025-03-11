@@ -8,27 +8,37 @@
 BONUS_CONT = 1000
 
 #1. Solicite o nome do usuario
-nome = input("Digite o seu nome: ")
-if nome.isdigit():
-    print("Você digitou o seu nome errado")
-    exit()
+try:
+    nome = input("Digite o seu nome: ")
 
-elif len(nome) == 0 or nome.isspace():
-    print('Você não digitou nada')
-    exit()
-else:
-    print(nome)
-
-'''
+    if len(nome) == 0:
+        raise ValueError('O nome não pode estar vazio')
+    elif nome.isdigit():
+        raise ValueError('O nome não deve ser um digitos')
+    else:
+        print(f'Nome válido: {nome}')
+except ValueError as e:
+    print(e)
+    
 #2. Digite o seu salario
-salario = float(input("Digite o seu salário: "))
-
+try:
+    salario = float(input("Digite o seu salário: "))
+    if salario < 0:
+        print('Por favor, digite um valor positivo para o salario')
+except ValueError:
+    print('Entrada inválida')
+    
 #3. Digite o valor do bonus recebido 
-bonus = float(input("Digite o valor do seu bônus: "))
+try: 
+    bonus = float(input("Digite o valor do seu bônus: "))
+    if bonus < 0: 
+        print('Por favor, digite um valor positivo para o bonus recebido: ')
+except ValueError:
+    print('Entrada inválida para bônus recebido')
+
 
 #4. Calcule o valor do bonus final 
 valor_bonus = BONUS_CONT + salario * bonus 
 
 #6. mensagem personalizada
-print(f' Olá! {nome} muito bom te ter por aqui! \n você possui o bonus de {valor_bonus}')
-'''
+print(f' Olá! {nome} muito bom te ter por aqui! \n você possui o bonus de R${valor_bonus}')
